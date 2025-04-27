@@ -17,6 +17,7 @@ class CreateUserView(generics.CreateAPIView):
 
   def create(self, request, *args, **kwargs):
     try:
+      print(request)
       response = super().create(request, *args, **kwargs)
       user = User.objects.get(username=response.data['username'])
       refresh = RefreshToken.for_user(user)
