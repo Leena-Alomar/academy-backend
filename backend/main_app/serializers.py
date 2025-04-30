@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import Course,User,Schedule,Lesson
+from .models import Course,User,Schedule,Lesson,Profile
 from django.contrib.auth.models import User
+
 
 
 # User Serializer
@@ -22,7 +23,21 @@ class UserSerializer(serializers.ModelSerializer):
       
         return user
 
+# Profile Serializer#
+class ProfileSerializer(serializers.ModelSerializer):
+    user_profile = UserSerializer(read_only=True)
+    class Meta:
+        model = Profile
+        fields = ('is_student')
 
+    def create(self, validated_data):
+            profile_type = Profile.objects.create_profile(
+            is_student=validated_data['profile'],
+        
+            )
+        
+            return profile_type
+        
 # Course Serializer
 class CourseSerializer(serializers.ModelSerializer):
     teacher =  serializers.PrimaryKeyRelatedField(read_only=True)

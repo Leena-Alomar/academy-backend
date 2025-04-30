@@ -12,4 +12,6 @@ urlpatterns = [
     path('users/signup/', views.CreateUserView.as_view(), name='signup'),
     path('users/login/', views.LoginView.as_view(), name='login'),
     path('users/token/refresh/', views.VerifyUserView.as_view(), name='token_refresh'),
+    path('users/profile/', views.CreateProfile.as_view(), name='signup'),
+    
 ]
